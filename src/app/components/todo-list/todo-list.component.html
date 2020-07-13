@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="row my-3">
+    <button class="col-md-2 btn btn-dark" [routerLink]="['/todo-add']">
+      Add Todo
+    </button>
+  </div>
+  <div class="row">
+    <h2 class="col-md-6">TodoList</h2>
+  </div>
+  <div class="row">
+    <div *ngIf="todosList.length>0 ;then todo else notodo"></div>
+    <ng-template #notodo>
+      <div class="alert alert-secondary w-100">aucun todo Trouvée</div>
+    </ng-template>
+    <ng-template #todo>
+
+      <table class="table table-striped">
+        <thead>
+          <tr class="thead-dark">
+            <th>#</th>
+            <th>Title</th>
+            <th>Added Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of todosList;let i=index">
+            <td>{{ i+1 }}</td>
+            <td> {{ todo.title }}</td>
+            <td> {{ todo.addeddate }}</td>
+            <td>
+              <button class="btn btn-dark" (click)="doneTodo(todo,i)">Done</button>
+              <button class="btn btn-outline-dark mx-3" [routerLink]="['/todo-update',todo._id]">Update </button>
+              <button class="btn btn-outline-danger" (click)="deleteToDo(i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+
+
+
+
+  </div>
+  <hr>
+  <div class="row">
+    <h2>Done</h2>
+  </div>
+  <div class="row">
+    <div *ngIf="donesList.length>0;then done else nodone"></div>
+    <ng-template #done>
+      <table class="table table-striped">
+        <thead>
+          <tr class="thead-dark">
+            <th>#</th>
+            <th>Title</th>
+            <th>Added Date</th>
+            <th>Ended Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of donesList;let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.addeddate }}</td>
+            <td>{{ todo.endeddate }}</td>
+            <td>
+              <button class="btn btn-outline-danger" (click)="deleteEndedToDo(i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+    <ng-template #nodone>
+      <div class="alert alert-secondary w-100">aucun done todo Trouvée</div>
+    </ng-template>
+
+
+
+  </div>
+</div>
+
+<app-footer></app-footer>

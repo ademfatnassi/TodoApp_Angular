@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <form [formGroup]="connexionForm" (ngSubmit)="connexion()" class="form-signin">
+    <div class="text-center mb-4">
+      <img class="mb-4" src="./../assets/logo.png" alt="" width="120" height="80">
+      <h1 class="h3 mb-3 font-weight-normal">Log In</h1>
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="text" id="email" name="email" class="form-control" formControlName="email"
+        placeholder="Email Address" />
+      <!---->
+      <div *ngIf=" email.touched &&  email.invalid" class="text-danger">
+        <div *ngIf=" email.errors.required">
+          email required!
+        </div>
+        <div *ngIf=" email.errors.pattern">
+          email invalid!
+        </div>
+      </div>
+      <!---->
+    </div>
+
+
+    <div>
+      <label>Password</label>
+      <input type="password" id="password" name="password" class="form-control" formControlName="password"
+        autocomplete="off" placeholder="Password"/>
+      <!---->
+      <div *ngIf=" password.touched &&  password.invalid" class="text-danger">
+        <div *ngIf=" password.errors.required">
+          password required!
+        </div>
+        <div *ngIf=" password.errors.pattern">
+          password invalid!
+        </div>
+      </div>
+      <!---->
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-secondary mt-5 btn-lg btn-block" value="Connexion" [disabled]="connexionForm.invalid" />
+    </div>
+
+  </form>
+</div>
+<app-footer></app-footer>

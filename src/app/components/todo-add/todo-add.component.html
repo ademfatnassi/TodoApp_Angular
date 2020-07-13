@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <form [formGroup]="addForm" (ngSubmit)="addTodo()">
+
+    <div class="form-group">
+      <h2 for="title">Title</h2>
+      <input type="text" id="title" name="title" class="form-control" formControlName="title" />
+      <!---->
+      <div *ngIf="title.touched && title.invalid" class="text-danger">
+        <div *ngIf="title.errors.required">
+          title required!
+        </div>
+        <div *ngIf="title.errors.pattern">
+          title invalid!
+        </div>
+      </div>
+      <!---->
+    </div>
+    <div class="form-group">
+        <input type="submit"  class="btn btn-dark btn-block btn-lg" value="Add" [disabled]="addForm.invalid"/>
+    </div>
+
+
+  </form>
+</div>
+<app-footer></app-footer>
